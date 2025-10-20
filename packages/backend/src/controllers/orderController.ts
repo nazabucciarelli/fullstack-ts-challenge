@@ -84,7 +84,10 @@ export const updateOrder = async (req: Request, res: Response) => {
 
 export const deleteOrder = async (req: Request, res: Response) => {
   try {
-    const deletedOrder = await Order.findOneAndUpdate({ id: req.params.id }, { deleted_at: new Date() });
+    const deletedOrder = await Order.findOneAndUpdate(
+      { id: req.params.id },
+      { deleted_at: new Date() }
+    );
     if (!deletedOrder) {
       return res.status(404).json({ message: 'Order not found' });
     }

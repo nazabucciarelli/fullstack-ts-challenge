@@ -2,11 +2,24 @@
   "name": "fullstack-challenge-monorepo",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "workspaces": [
     "packages/*"
   ],
   "scripts": {
     "dev": "npm run dev --workspace=packages/backend & npm run dev --workspace=packages/frontend",
-    "build": "npm run build --workspaces"
+    "build": "npm run build --workspaces",
+    "lint": "eslint . --fix --ext .ts,.js,.vue"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^8.46.2",
+    "@typescript-eslint/parser": "^8.46.2",
+    "eslint": "^9.38.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-import-resolver-typescript": "^4.4.4",
+    "eslint-plugin-prettier": "^5.5.4",
+    "eslint-plugin-vue": "^10.5.1",
+    "prettier": "^3.6.2",
+    "vue-eslint-parser": "^10.2.0"
   }
 }

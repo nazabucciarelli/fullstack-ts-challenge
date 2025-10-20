@@ -17,7 +17,11 @@ interface PaginatedOrdersResponse {
 }
 
 export default {
-  async getOrders(page: number, pageSize: number, status?: OrderStatus): Promise<PaginatedOrdersResponse> {
+  async getOrders(
+    page: number,
+    pageSize: number,
+    status?: OrderStatus
+  ): Promise<PaginatedOrdersResponse> {
     const params = new URLSearchParams({
       page: String(page),
       page_size: String(pageSize),

@@ -8,21 +8,21 @@
           <th>Item</th>
           <th>Quantity</th>
           <th>Status</th>
-          <th>Created At</th>
           <th>Actions</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="order in orders" :key="order.id">
+        <tr @click="emit('view', order)" v-for="order in orders" :key="order.id">
           <td class="order-id">{{ order.id.substring(0, 8) }}</td>
           <td>{{ order.customer_name }}</td>
           <td>{{ order.item }}</td>
           <td>{{ order.quantity }}</td>
-          <td><span :class="['status-badge', `status-${order.status}`]">{{ order.status }}</span></td>
-          <td>{{ formatDate(order.created_at) }}</td>
+          <td>
+            <span :class="['status-badge', `status-${order.status}`]">{{ order.status }}</span>
+          </td>
           <td class="actions-cell">
-            <button @click="emit('edit', order)" class="btn btn-edit">Edit</button>
-            <button @click="emit('delete', order.id)" class="btn btn-delete">Delete</button>
+            <button @click.stop="emit('edit', order)" class="btn btn-edit">Edit</button>
+            <button @click.stop="emit('delete', order.id)" class="btn btn-delete">Delete</button>
           </td>
         </tr>
       </tbody>
@@ -31,7 +31,9 @@
     <div class="pagination">
       <button @click="emit('prev-page')" :disabled="currentPage <= 1" class="btn">Previous</button>
       <span>Page {{ currentPage }} of {{ totalPages }}</span>
-      <button @click="emit('next-page')" :disabled="currentPage >= totalPages" class="btn">Next</button>
+      <button @click="emit('next-page')" :disabled="currentPage >= totalPages" class="btn">
+        Next
+      </button>
     </div>
   </div>
 </template>
@@ -46,11 +48,7 @@ interface Props {
 }
 defineProps<Props>();
 
-const emit = defineEmits(['edit', 'delete', 'prev-page', 'next-page']);
-
-const formatDate = (dateString: Date) => {
-  return new Date(dateString).toLocaleDateString();
-};
+const emit = defineEmits(['edit', 'view', 'delete', 'prev-page', 'next-page']);
 </script>
 
 <style scoped>
@@ -58,17 +56,26 @@ const formatDate = (dateString: Date) => {
   width: 100%;
   border-collapse: collapse;
   background-color: var(--card-bg);
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   overflow: hidden;
 }
-th, td {
+th,
+td {
   padding: 1rem;
   text-align: left;
   border-bottom: 1px solid var(--border-color);
 }
 th {
   background-color: var(--background-color);
+}
+tbody tr {
+  transition: transform 0.2s ease-in-out;
+}
+tbody tr:hover {
+  cursor: pointer;
+  transform: scale(1.01);
+  transition: transform 0.2s ease-in-out;
 }
 .order-id {
   font-family: monospace;
@@ -80,10 +87,15 @@ th {
   color: white;
   text-transform: capitalize;
 }
-.status-pending { background-color: #f5a623; }
-.status-completed { background-color: #7ed321; }
-.status-cancelled { background-color: #9b9b9b; }
-
+.status-pending {
+  background-color: #f5a623;
+}
+.status-completed {
+  background-color: #7ed321;
+}
+.status-cancelled {
+  background-color: #9b9b9b;
+}
 .actions-cell {
   display: flex;
   gap: 0.5rem;
@@ -95,9 +107,18 @@ th {
   border-radius: 5px;
   cursor: pointer;
 }
-.btn-edit { color: var(--primary-color); border-color: var(--primary-color); }
-.btn-delete { color: var(--danger-color); border-color: var(--danger-color); }
-
+.btn-edit {
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+.btn-delete {
+  color: var(--danger-color);
+  border-color: var(--danger-color);
+}
+.btn-view {
+  color: var(--secondary-color);
+  border-color: var(--secondary-color);
+}
 .pagination {
   display: flex;
   justify-content: center;

@@ -1,0 +1,13 @@
+{
+  "name": "@challenge/shared",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "scripts": {
+    "build": "tsc --declaration --outDir dist",
+    "dev": "tsc --watch --outDir dist"
+  },
+  "devDependencies": {
+    "typescript": "^5.2.2"
+  }
+}

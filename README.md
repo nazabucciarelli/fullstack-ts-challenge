@@ -78,4 +78,4 @@ The API is prefixed with `/api`.
 
 ## Code Walkthrough & Demo  
 
-Take a look at the code walkthrough and demo [here! ('In progress')]("www.google.com")
+Take a look at the code walkthrough and demo [here!]("https://drive.google.com/file/d/1eTj2KqaBy1BhItnK7DdfKr4m-BvG_G6M/view?usp=sharing")

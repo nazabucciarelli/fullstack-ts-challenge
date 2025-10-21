@@ -1,5 +1,5 @@
 <template>
-  <BaseModal :title="title">
+  <BaseModal :title="props.title">
     <template #body>
       <form @submit.prevent="handleSubmit">
         <div class="form-group">
@@ -41,6 +41,7 @@ import { IOrder, OrderStatus, CreateOrderDto, UpdateOrderDto } from '@challenge/
 
 interface Props {
   order: IOrder | null;
+  title: string;
 }
 const props = defineProps<Props>();
 const emit = defineEmits(['close', 'save']);

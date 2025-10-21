@@ -1,5 +1,5 @@
 <template>
-  <BaseModal :title="title" @close="emit('close')">
+  <BaseModal :title="props.title" @close="emit('close')">
     <template #body>
       <p>Do you really want to perform this action?</p>
       <div class="form-actions">
@@ -13,6 +13,11 @@
 <script setup lang="ts">
 import BaseModal from './BaseModal.vue';
 
+interface Props {
+  title: string;
+}
+
+const props = defineProps<Props>();
 const emit = defineEmits(['close', 'confirm']);
 </script>
 

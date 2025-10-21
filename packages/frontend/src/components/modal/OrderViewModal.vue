@@ -1,5 +1,5 @@
 <template>
-  <BaseModal :title="title" @close="emit('close')">
+  <BaseModal :title="props.title" @close="emit('close')">
     <template #body>
       <div>
         <h3>Order ID</h3>
@@ -33,12 +33,12 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue';
 import BaseModal from './BaseModal.vue';
-import { IOrder, OrderStatus, CreateOrderDto, UpdateOrderDto } from '@challenge/shared';
+import { IOrder } from '@challenge/shared';
 
 interface Props {
-  order: IOrder | null;
+  order: IOrder;
+  title: string;
 }
 const props = defineProps<Props>();
 const emit = defineEmits(['close']);

@@ -75,3 +75,7 @@ The API is prefixed with `/api`.
 -   `page` (number, default: 1): The page number to retrieve.
 -   `page_size` (number, default: 10): The number of items per page.
 -   `status` (string): Filter orders by status (`pending`, `completed`, `cancelled`).
+
+## Code Walkthrough & Demo  
+
+Take a look at the code walkthrough and demo [here! ('In progress')]("www.google.com")

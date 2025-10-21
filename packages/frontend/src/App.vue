@@ -60,7 +60,7 @@ import ConfirmationModal from './components/modal/ConfirmationModal.vue';
 const orders = ref<IOrder[]>([]);
 const showModal = ref(false);
 const currentOrder = ref<IOrder | null>(null);
-const mode = ref<'create' | 'edit' | 'view' | null>(null);
+const mode = ref<'create' | 'edit' | 'view' | 'confirm' | null>(null);
 const handleConfirm = ref(() => {});
 
 // Pagination and filtering state
@@ -151,7 +151,7 @@ const handleDelete = async (orderId: string) => {
 const handleSave = async (orderData: CreateOrderDto | UpdateOrderDto) => {
   try {
     displayLoader();
-    if ((mode.value = 'edit' && currentOrder.value)) {
+    if (mode.value === 'edit' && currentOrder.value) {
       await apiClient.updateOrder(currentOrder.value.id, orderData as UpdateOrderDto);
     } else {
       await apiClient.createOrder(orderData as CreateOrderDto);

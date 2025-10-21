@@ -1,8 +1,8 @@
 <template>
   <div class="modal-overlay">
     <div class="modal-content">
-      <header v-if="title" class="modal-header">
-        <h2>{{ title }}</h2>
+      <header v-if="props.title" class="modal-header">
+        <h2>{{ props.title }}</h2>
       </header>
 
       <section class="modal-body">

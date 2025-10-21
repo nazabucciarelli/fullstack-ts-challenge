@@ -12,7 +12,8 @@ RUN npm install
 COPY ./packages/backend ./packages/backend
 COPY ./packages/shared ./packages/shared
 
-RUN npm run build --workspace=@challenge/shared & npm run build --workspace=@challenge/backend
+RUN npm run build --workspace=@challenge/shared && \ 
+  npm run build --workspace=@challenge/backend
 
 # Stage 2: Production environment
 FROM node:18-alpine
